@@ -24,14 +24,14 @@ void mpower(double* A, int row, int n) {
 		if (i == 0) {
 			eye(T, row, row); // Identity matrix will return
 		} else if (i == 1) {
-			copy(A, T, row, row); // A - > T
+			matcopy(A, T, row, row); // A - > T
 		} else if (i == 2) {
 			mul(A, A, false, T, row, row, row); // T= A*A;
 		} else {
 			mul(A, T, false, T2, row, row, row); // T2 = A*T
-			copy(T2, T, row, row); // T2 -> T
+			matcopy(T2, T, row, row); // T2 -> T
 		}
 	}
-	copy(T, A, row, row); // T -> A and then return
+	matcopy(T, A, row, row); // T -> A and then return
 
 }

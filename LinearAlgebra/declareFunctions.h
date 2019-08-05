@@ -49,7 +49,7 @@ void cut(double* A, int row, int column, double* B, int start_row, int stop_row,
 void diagpower(double* A, double p, int row, int column);
 void eabs(double* A, int row, int column);
 void add(double* A, double* B, double* C, int row_a, int column_a, int column_b);
-void copy(double* A, double* B, int row, int column);
+void matcopy(double* A, double* B, int row, int column);
 void cofact(double* A, double* CO, int row, int column);
 void mdiag(double* A, double* B, int row, int column);
 double dot(double* A, double* B, int row);
