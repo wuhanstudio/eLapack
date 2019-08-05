@@ -6,14 +6,24 @@ env = Environment()
 objs = []
 
 # Lapack
-objs += Glob('Lapack/Blas/*.c')
-objs += Glob('Lapack/F2c/*.c')
-objs += Glob('Lapack/Install/*.c')
-objs += Glob('Lapack/Scr/*.c')
+objs += Glob('../Lapack/Blas/*.c')
+objs += Glob('../Lapack/F2c/*.c')
+objs += Glob('../Lapack/Install/*.c')
+objs += Glob('../Lapack/Scr/*.c')
 
 # Linear Algebra
-objs += Glob('LinearAlgebra/*.c')
+objs += Glob('../LinearAlgebra/*.c')
 
-objs += Glob('./main.c')
+objs += Glob('./example.c')
 
-env.Program(target = "main", source = objs, LIBS=['m'])
+# get current directory
+cwd     = os.getcwd()
+path    = [os.path.join(cwd, './')]
+path   += [os.path.join(cwd, '../')]
+path   += [os.path.join(cwd, '../LinearAlgebra')]
+path   += [os.path.join(cwd, '../Lapack/Blas')]
+path   += [os.path.join(cwd, '../Lapack/F2c')]
+path   += [os.path.join(cwd, '../Lapack/Install')]
+path   += [os.path.join(cwd, '../Lapack/Scr')]
+
+env.Program(target = "example", source = objs, CPPPATH = path, LIBS=['m'])
