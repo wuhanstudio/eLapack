@@ -15,6 +15,22 @@ src += Glob('Lapack/Scr/*.c')
 # Linear Algebra
 src += Glob('LinearAlgebra/*.c')
 
+# Examples
+if GetDepend('ELAPACK_USING_LINSOLVE'):
+	src    += Glob('Examples/rtt_linsolve.c')
+if GetDepend('ELAPACK_USING_LU'):
+	src    += Glob('Examples/rtt_lu.c')
+if GetDepend('ELAPACK_USING_QR'):
+	src    += Glob('Examples/rtt_qr.c')
+if GetDepend('ELAPACK_USING_SVD'):
+	src    += Glob('Examples/rtt_svd.c')
+if GetDepend('ELAPACK_USING_EIG'):
+	src    += Glob('Examples/rtt_eig.c')
+if GetDepend('ELAPACK_USING_STATE_SPACE'):
+	src    += Glob('Examples/rtt_state_space.c')
+if GetDepend('ELAPACK_USING_MODEL_PREDICTIVE'):
+	src    += Glob('Examples/rtt_model_predictive_control.c')
+
 path    = [cwd + '/']
 path   += [cwd + '/LinearAlgebra']
 path   += [cwd + '/Lapack/Blas']
