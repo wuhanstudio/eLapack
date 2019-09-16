@@ -1,0 +1,7 @@
+pc_linsolve
+pc_eig
+pc_lu
+pc_qr
+pc_svd
+pc_state_space
+pc_model_predictive_control

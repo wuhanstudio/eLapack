@@ -33,13 +33,17 @@ int main(int argc, char const *argv[])
                      3, 4,  5, 3};
 
     linsolve(A, X, B, 3, 4); // 3 = A row, 4 = B column
-
+    printf("\nA = \n\n");
+    print(A, 3, 3);
+    printf("B = \n\n");
+    print(B, 3, 4);
+    printf("X = \n\n");
     print(X, 3, 4);
 
-     // End
+    // End
     end = clock();
     cpu_time_used = ((float) (end - start)) / CLOCKS_PER_SEC;
-    printf("\nTotal speed  was %f ms\n", cpu_time_used * 1000);
+    printf("Total speed  was %f ms\n", cpu_time_used * 1000);
 
      return 0;
 }
