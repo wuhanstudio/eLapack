@@ -121,7 +121,7 @@ int main() {
 
     end = clock();
     cpu_time_used = ((float) (end - start)) / CLOCKS_PER_SEC;
-    printf("\nTotal speed  was %f ms\n", cpu_time_used * 1000);
+    printf("Total speed  was %f ms\n", cpu_time_used * 1000);
 
     return 0;
 }
