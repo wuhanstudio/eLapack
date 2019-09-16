@@ -46,13 +46,13 @@ static void elapack_eig_thread_entry(void *parameter)
     printf("Di = \n\n");
     print(Eimag, 6, 1);
     printf("W = \n\n");
-    print(Vreal_left, 6,6);
+    print(Vreal_left, 6, 6);
     printf("Wi = \n\n");
-    print(Vimag_left, 6,6);
+    print(Vimag_left, 6, 6);
     printf("V = \n\n");
-    print(Vreal_right, 6,6);
+    print(Vreal_right, 6, 6);
     printf("Vi = \n\n");
-    print(Vimag_right, 6,6);
+    print(Vimag_right, 6, 6);
 
     end = clock();
     cpu_time_used = ((float) (end - start)) / CLOCKS_PER_SEC;

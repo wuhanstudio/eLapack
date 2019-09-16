@@ -59,13 +59,18 @@ int main( )
    svd(A, U, S, V, row, column);
 
    // print
+   printf("\nA = \n\n");
+   print(A, row, column);
+   printf("U = \n\n");
    print(U, row, row);
+   printf("S = \n\n");
    print(S, row, column);
+   printf("V = \n\n");
    print(V, column, column);
 
    end = clock();
    cpu_time_used = ((float) (end - start)) / CLOCKS_PER_SEC;
-   printf("\nTotal speed  was %f ms\n", cpu_time_used * 1000);
+   printf("Total speed was %f ms\n", cpu_time_used * 1000);
 
    return 0;
 }

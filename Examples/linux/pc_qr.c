@@ -32,13 +32,16 @@ int main() {
     qr(A, Q, R, 6, 4);
 
     // Print
-    print(A, 6,4);
-    print(Q, 6,6);
-    print(R, 6,4);
+    printf("\nA = \n\n");
+    print(A, 6, 4);
+    printf("Q = \n\n");
+    print(Q, 6, 6);
+    printf("R = \n\n");
+    print(R, 6, 4);
 
     end = clock();
     cpu_time_used = ((float) (end - start)) / CLOCKS_PER_SEC;
-    printf("\nTotal speed  was %f ms\n", cpu_time_used * 1000);
+    printf("\nTotal speed was %f ms\n", cpu_time_used * 1000);
 
     return 0;
 }

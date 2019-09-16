@@ -13,7 +13,7 @@
 
 // [Q, R] = qr(A)
 
-static void elapack_qr(int argc, char const *argv[])
+static void elapack_qr_thread_entry(void *parameter)
 {
     clock_t start, end;
     float cpu_time_used;
@@ -34,12 +34,35 @@ static void elapack_qr(int argc, char const *argv[])
     qr(A, Q, R, 6, 4);
 
     // Print
-    print(A, 6,4);
-    print(Q, 6,6);
-    print(R, 6,4);
+    printf("\nA = \n\n");
+    print(A, 6, 4);
+    printf("Q = \n\n");
+    print(Q, 6, 6);
+    printf("R = \n\n");
+    print(R, 6, 4);
 
     end = clock();
     cpu_time_used = ((float) (end - start)) / CLOCKS_PER_SEC;
-    printf("\nTotal speed  was %f ms\n", cpu_time_used * 1000);
+    printf("[elapack] Total speed was %f ms\n", cpu_time_used * 1000);
+
+    // Uncomment this if you'd like to check memory usage with list_thread
+    while(1)
+    {
+        rt_thread_mdelay(500);
+    }
+}
+
+static void elapack_qr(int argc,char *argv[])
+{
+    rt_thread_t thread = rt_thread_create("e_qr", elapack_qr_thread_entry, RT_NULL, 2048, 25, 10);
+    if(thread != RT_NULL)
+    {
+        rt_thread_startup(thread);
+        rt_kprintf("[elapack] New thread qr\n");
+    }
+    else
+    {
+        rt_kprintf("[elapack] Failed to create thread qr\n");
+    }
 }
 MSH_CMD_EXPORT(elapack_qr, elapack qr decomposition example);

@@ -27,9 +27,8 @@
 #define row 17
 #define column 15
 
-static void elapack_svd(int argc, char const *argv[])
+static void elapack_svd_thread_entry(void *parameter)
 {
-
    clock_t start, end;
    float cpu_time_used;
    start = clock();
@@ -61,12 +60,37 @@ static void elapack_svd(int argc, char const *argv[])
    svd(A, U, S, V, row, column);
 
    // print
+   printf("\nA = \n\n");
+   print(A, row, column);
+   printf("U = \n\n");
    print(U, row, row);
+   printf("S = \n\n");
    print(S, row, column);
+   printf("V = \n\n");
    print(V, column, column);
 
    end = clock();
    cpu_time_used = ((float) (end - start)) / CLOCKS_PER_SEC;
-   printf("\nTotal speed  was %f ms\n", cpu_time_used * 1000);
+   printf("[elapack] Total speed was %f ms\n", cpu_time_used * 1000);
+
+    // Uncomment this if you'd like to check memory usage with list_thread
+    while(1)
+    {
+        rt_thread_mdelay(500);
+    }
+}
+
+static void elapack_svd(int argc,char *argv[])
+{
+    rt_thread_t thread = rt_thread_create("e_svd", elapack_svd_thread_entry, RT_NULL, 20480, 25, 10);
+    if(thread != RT_NULL)
+    {
+        rt_thread_startup(thread);
+        rt_kprintf("[elapack] New thread svd\n");
+    }
+    else
+    {
+        rt_kprintf("[elapack] Failed to create thread svd\n");
+    }
 }
 MSH_CMD_EXPORT(elapack_svd, elapack svd decomposition example);
