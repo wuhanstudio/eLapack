@@ -57,11 +57,17 @@ static void elapack_eig_thread_entry(void *parameter)
     end = clock();
     cpu_time_used = ((float) (end - start)) / CLOCKS_PER_SEC;
     printf("[elapack] Total speed was %f ms\n", cpu_time_used * 1000);
+
+    // Uncomment this if you'd like to check memory usage with list_thread
+    while(1)
+    {
+        rt_thread_mdelay(500);
+    }
 }
 
 static void elapack_eig(int argc,char *argv[])
 {
-    rt_thread_t thread = rt_thread_create("elapack_eig", elapack_eig_thread_entry, RT_NULL, 25600, 25, 10);
+    rt_thread_t thread = rt_thread_create("e_eig", elapack_eig_thread_entry, RT_NULL, 25600, 25, 10);
     if(thread != RT_NULL)
     {
         rt_thread_startup(thread);

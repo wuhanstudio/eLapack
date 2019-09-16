@@ -43,7 +43,7 @@ int main(int argc, char const *argv[])
     // End
     end = clock();
     cpu_time_used = ((float) (end - start)) / CLOCKS_PER_SEC;
-    printf("Total speed  was %f ms\n", cpu_time_used * 1000);
+    printf("Total speed was %f ms\n", cpu_time_used * 1000);
 
      return 0;
 }
