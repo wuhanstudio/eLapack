@@ -14,8 +14,6 @@ objs += Glob('../../Lapack/Scr/*.c')
 # Linear Algebra
 objs += Glob('../../LinearAlgebra/*.c')
 
-objs += Glob('./pc_eig.c')
-
 # get current directory
 cwd     = os.getcwd()
 path    = [os.path.join(cwd, './')]
@@ -26,4 +24,10 @@ path   += [os.path.join(cwd, '../../Lapack/F2c')]
 path   += [os.path.join(cwd, '../../Lapack/Install')]
 path   += [os.path.join(cwd, '../../Lapack/Scr')]
 
-env.Program(target = "example", source = objs, CPPPATH = path, LIBS=['m'])
+env.Program(target = "pc_linsolve", source = objs + Glob('./pc_linsolve.c'), CPPPATH = path, LIBS=['m'])
+env.Program(target = "pc_lu", source = objs + Glob('./pc_lu.c'), CPPPATH = path, LIBS=['m'])
+env.Program(target = "pc_qr", source = objs + Glob('./pc_qr.c'), CPPPATH = path, LIBS=['m'])
+env.Program(target = "pc_eig", source = objs + Glob('./pc_eig.c'), CPPPATH = path, LIBS=['m'])
+env.Program(target = "pc_svd", source = objs + Glob('./pc_svd.c'), CPPPATH = path, LIBS=['m'])
+env.Program(target = "pc_state_space", source = objs + Glob('./pc_state_space.c'), CPPPATH = path, LIBS=['m'])
+env.Program(target = "pc_model_predictive_control", source = objs + Glob('./pc_model_predictive_control.c'), CPPPATH = path, LIBS=['m'])

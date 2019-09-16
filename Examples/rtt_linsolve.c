@@ -4,21 +4,15 @@
 #include <LinearAlgebra/declareFunctions.h>
 
 /* Matlab Code */
-// >> A=[3, 4, 1; 6, 10, 2; 5, 3, 2]
-// A =
+// A= [3,  4, 1; 
+//     6, 10, 2; 
+//     5,  3, 2]
 
-//     3    4    1
-//     6   10    2
-//     5    3    2
+// B =  [4, 3, 22, 5; 
+//       5, 3,  2, 5; 
+//       3, 4,  5, 3]
 
-// >> B =  [4, 3, 22, 5; 5, 3, 2, 5; 3, 4, 5, 3]
-// B =
-
-//     4    3   22    5
-//     5    3    2    5
-//     3    4    5    3
-
-// >> linsolve(A, X, B, 3, 4)
+// linsolve(A, X, B, 3, 4)
 
 static void elapack_linsolve(int argc, char const *argv[])
 {
