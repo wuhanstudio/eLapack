@@ -135,7 +135,7 @@ static void elapack_model_predictive_control_thread_entry(void *parameter)
 
 static void elapack_model_predictive_control(int argc,char *argv[])
 {
-    rt_thread_t thread = rt_thread_create("e_state", elapack_model_predictive_control_thread_entry, RT_NULL, 10240, 25, 10);
+    rt_thread_t thread = rt_thread_create("e_mod", elapack_model_predictive_control_thread_entry, RT_NULL, 20480, 25, 10);
     if(thread != RT_NULL)
     {
         rt_thread_startup(thread);
