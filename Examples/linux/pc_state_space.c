@@ -128,18 +128,18 @@ int main() {
     /*
      * Print A, B, C
      */
-    printf("A Matrix: \n");
+    printf("\nA = \n\n");
     print(Ad, 2, 2);
 
-    printf("B Matrix: \n");
+    printf("B = \n\n");
     print(Bd, 2, 1);
 
-    printf("C Matrix: \n");
+    printf("C = \n\n");
     print(Cd, 1, 2);
 
     end = clock();
     cpu_time_used = ((float) (end - start)) / CLOCKS_PER_SEC;
-    printf("Total speed  was %f ms\n", cpu_time_used * 1000);
+    printf("Total speed was %f ms\n", cpu_time_used * 1000);
 
     return 0;
 }

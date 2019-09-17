@@ -3,7 +3,7 @@
 #include <time.h>
 #include <LinearAlgebra/declareFunctions.h>
 
-static void elapack_state_space(int argc, char const *argv[])
+static void elapack_state_space_thread_entry(void *parameter)
 {
     /*
      * G(s) = 1/(s^2 + 1s + 3)  - Model
@@ -129,17 +129,37 @@ static void elapack_state_space(int argc, char const *argv[])
     /*
      * Print A, B, C
      */
-    printf("A Matrix: \n");
+    printf("\nA = \n\n");
     print(Ad, 2, 2);
 
-    printf("B Matrix: \n");
+    printf("B = \n\n");
     print(Bd, 2, 1);
 
-    printf("C Matrix: \n");
+    printf("C = \n\n");
     print(Cd, 1, 2);
 
     end = clock();
     cpu_time_used = ((float) (end - start)) / CLOCKS_PER_SEC;
-    printf("\nTotal speed  was %f ms\n", cpu_time_used * 1000);
+    printf("[elapack] Total speed was %f ms\n", cpu_time_used * 1000);
+
+    // Uncomment this if you'd like to check memory usage with list_thread
+    while(1)
+    {
+        rt_thread_mdelay(500);
+    }
+}
+
+static void elapack_state_space(int argc,char *argv[])
+{
+    rt_thread_t thread = rt_thread_create("e_state", elapack_state_space_thread_entry, RT_NULL, 819200, 25, 10);
+    if(thread != RT_NULL)
+    {
+        rt_thread_startup(thread);
+        rt_kprintf("[elapack] New thread state space\n");
+    }
+    else
+    {
+        rt_kprintf("[elapack] Failed to create thread state space\n");
+    }
 }
 MSH_CMD_EXPORT(elapack_state_space, elapack state space example);
