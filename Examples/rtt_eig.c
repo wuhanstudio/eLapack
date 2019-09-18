@@ -67,7 +67,7 @@ static void elapack_eig_thread_entry(void *parameter)
 
 static void elapack_eig(int argc,char *argv[])
 {
-    rt_thread_t thread = rt_thread_create("e_eig", elapack_eig_thread_entry, RT_NULL, 25600, 25, 10);
+    rt_thread_t thread = rt_thread_create("e_eig", elapack_eig_thread_entry, RT_NULL, 28672, 25, 10);
     if(thread != RT_NULL)
     {
         rt_thread_startup(thread);
