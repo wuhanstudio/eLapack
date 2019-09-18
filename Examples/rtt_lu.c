@@ -53,7 +53,7 @@ static void elapack_lu_thread_entry(void *parameter)
     }
 }
 
-static void elapack_lu(int argc,char *argv[])
+static void elapack_lu(int argc, char *argv[])
 {
     rt_thread_t thread = rt_thread_create("e_lu", elapack_lu_thread_entry, RT_NULL, 2048, 25, 10);
     if(thread != RT_NULL)

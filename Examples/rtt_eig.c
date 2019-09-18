@@ -28,12 +28,12 @@ static void elapack_eig_thread_entry(void *parameter)
                       2,  1,  44, 54,  3,  2};
 
 
-    double Ereal[6]; // Eigenvalues real
-    double Eimag[6]; // Eigenvalues imag part
-    double Vreal_left[6*6]; // Eigenvectors real left
-    double Vimag_left[6*6]; // Eigenvectors imag left
-    double Vreal_right[6*6]; // Eigenvectors real right
-    double Vimag_right[6*6]; // Eigenvectors imag right
+    double Ereal[6];            // Eigenvalues real
+    double Eimag[6];            // Eigenvalues imag part
+    double Vreal_left[6*6];     // Eigenvectors real left
+    double Vimag_left[6*6];     // Eigenvectors imag left
+    double Vreal_right[6*6];    // Eigenvectors real right
+    double Vimag_right[6*6];    // Eigenvectors imag right
 
     // Solve
     eig(A,Ereal,Eimag,Vreal_left,Vimag_left,Vreal_right,Vimag_right,6);
@@ -65,7 +65,7 @@ static void elapack_eig_thread_entry(void *parameter)
     }
 }
 
-static void elapack_eig(int argc,char *argv[])
+static void elapack_eig(int argc, char *argv[])
 {
     rt_thread_t thread = rt_thread_create("e_eig", elapack_eig_thread_entry, RT_NULL, 28672, 25, 10);
     if(thread != RT_NULL)

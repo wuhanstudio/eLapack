@@ -7,14 +7,14 @@
  * Here you can set the sizes for the matrices
  */
 
-#define row_a 2 // A row
-#define column_a 2 // A column
+#define row_a 2         // A row
+#define column_a 2      // A column
 
-#define row_b 2 // B row, the same row as A.
-#define column_b 1 // B column, the same column as D
+#define row_b 2         // B row, the same row as A.
+#define column_b 1      // B column, the same column as D
 
-#define row_c 1 // C row, the same row as D
-#define column_c 2 // C column, the same column as A
+#define row_c 1         // C row, the same row as D
+#define column_c 2      // C column, the same column as A
 
 /*
  * Create a state space model - discrete
@@ -63,14 +63,14 @@ static void elapack_model_predictive_control_thread_entry(void *parameter)
     double C_[row_c * column_c];
 
     for (int i = 1; i <= row_o; i++) {
-        matcopy(A, A_, row_a, column_a); // Copy A -> A_
-        mpower(A_, row_a, i); // Power A_^i
-        mul(C, A_, false, C_, row_c, column_c, column_a); // C_ = C*A_
-        insert(C_, O, row_c, column_c, row_a, (i-1)*row_c, 0); // Insert O = [CA^1; CA^2; CA^3; ... ; CA^row_o];
+        matcopy(A, A_, row_a, column_a);                        // Copy A -> A_
+        mpower(A_, row_a, i);                                   // Power A_^i
+        mul(C, A_, false, C_, row_c, column_c, column_a);       // C_ = C*A_
+        insert(C_, O, row_c, column_c, row_a, (i-1)*row_c, 0);  // Insert O = [CA^1; CA^2; CA^3; ... ; CA^row_o];
 
-        matcopy(A, A_, row_a, column_a); // Copy A -> A_
-        mpower(A_, row_a, i - 1); // Power A_^(i-1)
-        mul(C, A_, false, C_, row_c, column_c, column_a); // C_ = C*A_
+        matcopy(A, A_, row_a, column_a);                        // Copy A -> A_
+        mpower(A_, row_a, i - 1);                               // Power A_^(i-1)
+        mul(C, A_, false, C_, row_c, column_c, column_a);       // C_ = C*A_
         insert(C_, O_, row_c, column_c, row_a, (i-1)*row_c, 0); // Insert O_ = [CA^0; CA^1; CA^2; ... ; CA^(row_o-1)];
     }
 
@@ -93,21 +93,21 @@ static void elapack_model_predictive_control_thread_entry(void *parameter)
         move(T, row_o * row_c, column_b, row_c , 0);
     }
 
-    //print(H, row_o * row_c, column_h * column_b); // H matrix
+    //print(H, row_o * row_c, column_h * column_b);         // H matrix
 
 
     /*
      * Compute U = pinv(H)*(Ry*R - O*X), where R is our reference vector, X is our initial state vector
      */
 
-    pinv(H, row_o * row_c, column_h * column_b); // Pseudo inverse of H. Using the SVD method
+    pinv(H, row_o * row_c, column_h * column_b);            // Pseudo inverse of H. Using the SVD method
 
     double Ry[(row_o * row_c)*column_ry];
     ones(Ry, row_o * row_c, column_ry);
-    scale(Ry, R, row_o * row_c, column_ry); // Ry*R = Ry
+    scale(Ry, R, row_o * row_c, column_ry);                 // Ry*R = Ry
 
     double OX[(row_o * row_c)*column_ry];
-    mul(O, X, false, OX, row_o * row_c, row_a, column_ry); // O*X
+    mul(O, X, false, OX, row_o * row_c, row_a, column_ry);  // O*X
 
     double Ry_OX[(row_o * row_c)*column_ry];
     sub(Ry, OX, Ry_OX, row_o * row_c, column_ry, column_ry); // Ry-O*X
@@ -133,7 +133,7 @@ static void elapack_model_predictive_control_thread_entry(void *parameter)
     }
 }
 
-static void elapack_model_predictive_control(int argc,char *argv[])
+static void elapack_model_predictive_control(int argc, char *argv[])
 {
     rt_thread_t thread = rt_thread_create("e_mod", elapack_model_predictive_control_thread_entry, RT_NULL, 20480, 25, 10);
     if(thread != RT_NULL)
