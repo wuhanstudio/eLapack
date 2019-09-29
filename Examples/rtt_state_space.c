@@ -151,7 +151,7 @@ static void elapack_state_space_thread_entry(void *parameter)
 
 static void elapack_state_space(int argc, char *argv[])
 {
-    rt_thread_t thread = rt_thread_create("e_state", elapack_state_space_thread_entry, RT_NULL, 819200, 25, 10);
+    rt_thread_t thread = rt_thread_create("e_state", elapack_state_space_thread_entry, RT_NULL, 1024000, 25, 10);
     if(thread != RT_NULL)
     {
         rt_thread_startup(thread);
